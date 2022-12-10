@@ -1,0 +1,28 @@
+# This is a basic workflow to help you get started with Actions
+
+name: 'Update Bot'
+ 
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '12 2 * * *'
+    
+jobs:
+  bot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout Ubuntu'
+        uses: actions/checkout@v1
+      - name: 'Fetch'
+        run: curl -sLf https://raw.githubusercontent.com/XIU2/TrackersListCollection/master/http.txt | grep -E '^https' > https.txt
+      - name: 'commit'
+        run: |
+          git config --global user.email 30486766+entr0pia@users.noreply.github.com
+          git config --global user.name entr0pia
+          git add *
+          git commit -m "update by bot"
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          
