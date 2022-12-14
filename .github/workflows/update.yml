@@ -5,7 +5,7 @@ name: 'Update Bot'
 on:
   workflow_dispatch:
   schedule:
-    - cron: '12 2 * * 1'
+    - cron: '12 2 12 * *'
     
 jobs:
   bot:
